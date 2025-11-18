@@ -88,6 +88,38 @@ class BT:
         total = left_count + right_count + (1 if is_uni else 0)
         return is_uni, total
 
+    # def countSingleChildNodes(self, root): --> correct however next one is better
+        #     if root is None:
+        #         return 0
+
+        #     my_count = 0
+
+        #     if node.left is not None and node.right is None:
+        #         my_count += 1
+
+        #     if node.left is None and node.right is not None:
+        #         my_count += 1
+
+        #     left = self.countSingleChildNodes(node.left)
+        #     right = self.countSingleChildNodes(node.right)
+
+    #    return my_count + left + right
+
+    def countSingleChildNodes(self, root):
+        # Base case
+        if root is None:
+            return 0
+
+        # Recurse on children
+        left_count = self.countSingleChildNodes(root.left)
+        right_count = self.countSingleChildNodes(root.right)
+
+        has_left = root.left is not None
+        has_right = root.right is not None
+        current = 1 if (has_left ^ has_right) else 0  # XOR: true if exactly one is true
+
+        return left_count + right_count + current
+
 
 
 
