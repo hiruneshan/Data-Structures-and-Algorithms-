@@ -120,6 +120,52 @@ class BT:
 
         return left_count + right_count + current
 
+        # more coode less efficent
+        # def get_sum(node):
+        #     if node is None:
+        #         return 0
+
+        #     my_count = 0
+
+        #     if node.value % 2 == 0:
+        #         if node.left:
+        #             if node.left.left:
+        #                 my_count += node.left.left.value
+        #             if node.left.right:
+        #                 my_count += node.left.right.value
+
+        #         if node.right:
+        #             if node.right.left:
+        #                 my_count += node.right.left.value
+        #             if node.right.right:
+        #                 my_count += node.right.right.value
+
+        #     left = get_sum(node.left)
+        #     right = get_sum(node.right)
+
+        #     return left + right + my_count
+
+        # less code and more efficient
+
+    def sum_even_main_func(self):
+        return self.sum_even_grandParent(self.root, None, None)
+
+    def sum_even_grandParent(self, node, parent, grandparent):
+
+        if node is None:
+            return 0
+
+        total = 0
+        if grandparent and grandparent.value % 2 == 0:
+            total += node.value
+
+        left_sum = self.sum_even_grandParent(node.left, node, parent)
+        right_sum = self.sum_even_grandParent(node.right, node, parent)
+
+        return total + left_sum + right_sum
+
+
+
 
 
 
