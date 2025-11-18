@@ -61,6 +61,33 @@ class BT:
         # Include current node's value if it has exactly one child
         return left_sum + right_sum + (node.value if has_one_child else 0)
 
+        # if we are not using a value from the func call, we are using _, in order to ignore it
+
+    def count_unival_subtrees(self):
+        _, total_count = self.helper(self.root)
+        return total_count
+
+    def helper(self, node):
+        if node is None:
+            return True, 0
+
+        left_uni, left_count = self.helper(node.left)
+        right_uni, right_count = self.helper(node.right)
+
+        is_uni = True
+
+        if node.left and node.left.value != node.value:
+            is_uni = False
+
+        if not node.right and node.right.value != node.value:
+            is_uni = False
+
+        if not left_uni or not right_uni:
+            is_uni = False
+
+        total = left_count + right_count + (1 if is_uni else 0)
+        return is_uni, total
+
 
 
 
