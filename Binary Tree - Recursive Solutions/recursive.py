@@ -164,6 +164,7 @@ class BT:
 
         return total + left_sum + right_sum
 
+    #if the given nodes are nodes, if they were values we will not be using .value
     def lowestCommonAncestor(self, root, n1, n2):
 
 
