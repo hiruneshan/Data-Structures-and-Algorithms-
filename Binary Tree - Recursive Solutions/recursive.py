@@ -184,7 +184,23 @@ class BT:
 
         return rec_helper(self.root, n1, n2)
 
+    def _find_floor_recursive(self, node, target):
 
+        def find_floor_helper(subtree, target, floor_tar):
+
+            if subtree is None:
+                return floor_tar
+
+            if node.value > target:
+                return find_floor_helper(subtree.left, target, floor_tar)
+
+            elif node.value == target:
+                return node.value
+
+            else:
+                return find_floor_helper(subtree.right, target, node.value)
+
+        return find_floor_helper(self.root, target, self.root.value)
 
 
 
