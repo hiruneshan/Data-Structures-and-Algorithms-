@@ -164,7 +164,24 @@ class BT:
 
         return total + left_sum + right_sum
 
+    def lowestCommonAncestor(self, root, n1, n2):
 
+
+        def rec_helper(subtree, n1, n2):
+
+            if subtree is None:
+                return None
+
+            if n1.value < subtree.data and n2.value < subtree.data:
+                return rec_helper(subtree.left, n1, n2)
+
+            elif n1.value > subtree.data and n2.value > subtree.data:
+                return rec_helper(subtree.right, n1, n2)
+
+            else:
+                return subtree.data
+
+        return rec_helper(self.root, n1, n2)
 
 
 
