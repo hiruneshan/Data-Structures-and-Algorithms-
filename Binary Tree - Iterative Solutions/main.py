@@ -102,7 +102,53 @@ class BT:
         return count
 
 
+def count_path_with_sum(self, target: int) -> int:
+    if self.root is None:
+        return None
 
+    stack = [(self.root, target)]
+    count = 0
+
+    while stack:
+        curr, rem = stack.pop()
+
+        if curr.left is None and curr.right is None:
+            if curr.data == rem:
+                count += 1
+
+        new_rem = rem - curr.data
+
+        if curr.left:
+            stack.append((curr.left, new_rem))
+        if curr.right:
+            stack.append((curr.right, new_rem))
+
+    return count
+
+
+def count_path_with_sum2(self, target: int) -> int:
+    if self.root is None:
+        return None
+
+    stack = [(self.root, target)]
+    count = 0
+
+    while stack:
+        curr, rem = stack.pop()
+
+        new_rem = rem - curr.data
+
+        if curr.left is None and curr.right is None:
+            if new_rem == 0:
+                count += 1
+
+        if curr.left:
+            stack.append((curr.left, new_rem))
+
+        if curr.right:
+            stack.append((curr.right, new_rem))
+
+    return count
 
 
 
