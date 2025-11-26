@@ -151,5 +151,60 @@ def count_path_with_sum2(self, target: int) -> int:
     return count
 
 
+def sum_root_to_leaf_numbers(self):
+    if self.root is None:
+        return None
+
+    stack = [(self.root, 0)]
+    total_sum = 0
+
+    while stack:
+        Node, num = stack.pop()
+
+        # checking if the node is a leaf
+        num = num * 10 + Node.data
+
+        if Node.left is None and Node.right is None:
+            total_sum += num
+
+        if Node.left:
+            stack.append((Node.left, num))
+
+        if Node.right:
+            stack.append((Node.right, num))
+
+    return total_sum
+
+    # only difference is the way carry forward num is calculated
+
+
+def sum_root_to_leaf_numbers2(self):
+    if not self.root:
+        return 0
+
+    total_sum = 0
+    stack = [(self.root, self.root.value)]
+
+    while stack:
+        node, current_num = stack.pop()
+
+        # If it's a leaf, add the formed number
+        if not node.left and not node.right:
+            total_sum += current_num
+
+        # Push right child first so left is processed next (optional order)
+        if node.right:
+            new_num = current_num * 10 + node.right.value
+            stack.append((node.right, new_num))
+        if node.left:
+            new_num = current_num * 10 + node.left.value
+            stack.append((node.left, new_num))
+
+    return total_sum
+
+
+
+
+
 
 
