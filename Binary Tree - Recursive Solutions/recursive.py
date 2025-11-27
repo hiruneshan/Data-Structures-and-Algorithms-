@@ -205,7 +205,40 @@ class BT:
 
 
 
+    def sum_single_child_nodes(self):
+        self.sum_value = 0
 
+        def helper(node):
 
+            if node is None:
+                return
 
+            if (node.left is None and node.right is not None) or (node.left is not None and node.right is None):
+                self.sum_value += node.data
+
+            helper(node.left)
+            helper(node.right)
+
+        helper(self.root)
+        return self.sum_val
+
+    def count_good_nodes(self):
+        self.coount = 0
+
+        # we are using self inside nested function
+        def helper(subtree, max_in):
+
+            if subtree is None:
+                return 0
+
+            if subtree.data > max_in:
+                self.count += 1
+
+            new_sum = max(subtree.data, max_in)
+
+            left = helper(subtree.left, new_sum)
+            right = helper(subtree.right, new_sum)
+
+        helper(self.root, float('-inf'))
+        return self.count
 

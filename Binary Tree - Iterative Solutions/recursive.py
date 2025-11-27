@@ -222,3 +222,21 @@ class BT:
         helper(self.root)
         return self.sum_val
 
+
+
+    def count_unival_subtrees(self) -> int:
+        self.count = 0
+
+        def helper1(subtree):
+            if subtree is None:
+                return None
+
+            if subtree.left and subtree.right:
+
+                if subtree.left.value == subtree.right.value:
+                    self.count += 1
+
+            helper1(subtree.left)
+            helper1(subtree.right)
+
+        helper1(self.root)
