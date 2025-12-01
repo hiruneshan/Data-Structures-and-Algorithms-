@@ -108,6 +108,51 @@ def dist_from_node(self, node, target):
     return -1
 
 
+"""
+Given a non-empty Binary Search Tree (BST) of unique integer values and a target value (which may not exist in the tree), implement an iterative method to find both:
 
+The floor of the target: the greatest value in the BST that is ≤ the target.
+
+The ceil of the target: the least value in the BST that is ≥ the target.
+
+If there is no valid floor (all values are greater than the target), return None for the floor.
+If there is no valid ceil (all values are less than the target), return None for the ceil.
+
+Your solution must run in O(log n) time on a balanced BST by following a single path from the root to a leaf, leveraging the BST property (left < root < right). You must not traverse the entire tree.
+
+Example Tree (preserve whitespace):
+
+        15
+       /  \
+      10   20
+     /  \   \
+    8   12  25
+          \
+          19
+
+"""
+
+
+def find_floor_ceil(self, target):
+    if self.root is None:
+        return 0
+
+    curr = self.root
+    floor = None
+    ceiling = None
+
+    while curr:
+
+        if curr.data == target:
+            return curr.data, curr.data
+        # floor
+        elif curr.data <= target:
+            floor = curr.data
+            curr = curr.right
+
+        else:
+            ceiling = curr.data
+            curr = curr.left
+    return floor, ceiling
 
 
