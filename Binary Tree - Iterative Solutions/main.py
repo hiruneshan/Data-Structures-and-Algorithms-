@@ -202,8 +202,51 @@ def sum_root_to_leaf_numbers2(self):
 
     return total_sum
 
+"""
+Given a binary tree, implement an iterative method sum_at_level(k) that returns the sum of all node values at the kth level of the tree. The root is considered to be at level 1. You may assume that the tree and integer k are provided, and that k is a positive integer. Your solution must use loops (e.g., while or for) and must not use recursion.
+
+Example Tree (shown here preserving whitespace):
+
+       5
+      / \
+     3   8
+    / \   \
+   1   4   9
+      /
+     2
+
+"""
 
 
+def sum_at_level(self, k):
+
+    if self.root is None:
+        return 0
+
+    stack = [self.root]
+    self.sum = 0
+    level_num = 1
+
+    while stack:
+        level_len = len(stack)
+        for _ in range(level_len):
+            node = stack.pop(0)
+
+            if level_num == k:
+                self.sum += node.data
+
+            if node.left:
+                stack.append(node.left)
+
+            if node.right:
+                stack.append(node.right)
+
+        if level_num == k:
+            return self.sum
+
+        level_num += 1
+
+    return 0 #or -1
 
 
 
