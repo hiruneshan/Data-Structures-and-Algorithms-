@@ -285,3 +285,39 @@ def sum_min_depth_leaves(self):
 
         minDepth, sumLevels = helper(self.root)
         return sumLevels
+
+"""
+Recursive Binary Tree Question
+Problem Statement:
+Given a binary tree, compute the sum of all node values that have an even-valued grandparent. A grandparent of a node is the parent of its parent. If there is no grandparent or the grandparent’s value is odd, that node does not contribute to the sum.
+
+Example Tree (shown here preserving whitespace):
+
+            6
+          /   \
+         7     8
+        / \   / \
+       2   7 1   3
+      / \         \
+     9   1         5
+
+
+"""
+def rec_method(self):
+    if self.root is None:
+        return 0
+
+    self.total = 0
+
+    def helper(node, parent, grandParent):
+        if node is None:
+            return
+
+        if grandParent and grandParent.value % 2 == 0:
+            self.total += grandParent.value
+
+        helper(node.left, node, parent)
+        helper(node.right, node, parent)
+
+    helper(self.root, None, None)
+    return self.total
