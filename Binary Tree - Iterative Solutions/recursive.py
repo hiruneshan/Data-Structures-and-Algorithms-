@@ -321,3 +321,60 @@ def rec_method(self):
 
     helper(self.root, None, None)
     return self.total
+
+
+"""
+Given a binary tree of integers, write a recursive function to find the maximum sum of values along any path from the root down to a leaf. A leaf is a node with no children. Your function should return this maximum root-to-leaf path sum.
+
+Example Tree (shown here preserving whitespace):
+
+       5
+      / \
+     3   8
+    / \   \
+   1   4   10
+"""
+
+
+def max_root_to_leaf_sum(self, root):
+
+    if root is None:
+        return 0
+
+    def helper(subtree):
+        if subtree is None:
+            return float('-inf')
+
+        if subtree.left is None and subtree.right is None:
+            return subtree.value
+
+        left = helper(subtree.left)
+        right = helper(subtree.right)
+
+        return subtree.value + max(left, right)
+    return helper(root)
+
+
+
+def max_subtree_sum(self):
+    if self.root is None:
+        return 0
+
+    self.max_subtree = '-inf'
+
+    def helper(node):
+        if node is None:
+            return 0
+
+        left = helper(node.left)
+        right = helper(node.right)
+        curr_max = node.value + left + right
+
+        self.max_subtree = max(self.max_subtree, curr_max)
+
+        return curr_max
+
+    helper(self.root)
+    return self.max_subtree
+
+
