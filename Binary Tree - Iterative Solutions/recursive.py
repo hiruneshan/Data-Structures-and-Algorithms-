@@ -240,3 +240,48 @@ class BT:
             helper1(subtree.right)
 
         helper1(self.root)
+
+
+"""
+Given a binary tree, write a recursive function to compute the sum of all leaf-node values that occur at the minimum depth from the root.
+
+The minimum depth is defined as the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+A leaf node is a node with no children (both left and right pointers are None).
+
+Example Tree (shown here preserving whitespace):
+
+      1
+     / \
+    2   3
+   /   / \
+  4   5   6
+         /
+        7
+"""
+    def sum_min_depth_leaves(self):
+        if self.root is None:
+            return None
+
+        def helper(node):
+
+            if node is None:
+                return (float('inf'), 0)
+
+            if node.left is None and node.right is None:
+                return (1, node.value)
+
+            left_depth, left_val = helper(node.left)
+            right_depth, right_val = helper(node.right)
+
+            if left_depth < right_depth:
+                return (left_depth + 1, left_val)
+
+            if right_depth < left_depth:
+                return (right_depth + 1, right_val)
+
+            else:
+                return (left_depth + 1, right_val + left_val)
+
+        minDepth, sumLevels = helper(self.root)
+        return sumLevels
