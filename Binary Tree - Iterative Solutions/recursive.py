@@ -259,7 +259,7 @@ Example Tree (shown here preserving whitespace):
          /
         7
 """
-    def sum_min_depth_leaves(self):
+def sum_min_depth_leaves(self):
         if self.root is None:
             return None
 
