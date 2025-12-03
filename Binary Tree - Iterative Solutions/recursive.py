@@ -378,3 +378,53 @@ def max_subtree_sum(self):
     return self.max_subtree
 
 
+def deepestLeve(self):
+    if self.root is None:
+        return 0
+
+    def helper(subtree):
+        if subtree is None:
+            return 0
+
+        left = helper(subtree.left)
+        right = helper(subtree.right)
+
+        return 1 + max(left, right)
+
+    depeest = helper(self.root)
+    self.sum = 0
+    def helper2(subtree, curr_level, deepest):
+        if subtree is None:
+            return 0
+
+        if curr_level == deepest:
+            self.sum += subtree.value
+
+        helper2(subtree.left, curr_level + 1, deepest)
+        helper2(subtree.right, curr_level + 1, deepest)
+
+
+
+def count_ancestor_greater_nodes(self) -> int:
+    if self.root is None:
+       return 0
+
+        #we have to save the greatest value we meet in the path and then pass it across
+        #trying to do this with a tuple
+
+    def helper(subtree, curr_max):
+        if subtree is None:
+            return 0
+
+        if subtree.value > curr_max:
+            count = 1
+            curr_max = subtree.value
+
+        count += helper(subtree.left, curr_max)
+        count += helper(subtree.right, curr_max)
+
+        return count
+
+    return helper(self.root, float('-inf'))
+
+
