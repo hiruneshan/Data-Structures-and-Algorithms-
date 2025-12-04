@@ -249,6 +249,47 @@ def sum_at_level(self, k):
     return 0 #or -1
 
 
+"""
+Given a binary tree where each node contains an integer value, write an iterative method max_ancestor_diff() that computes the maximum absolute difference between the value of any node and the value of any of its ancestors. An ancestor of a node is any node in the path from the root to that node (excluding the node itself).
+
+Example Tree (shown here preserving whitespace):
+
+         8
+        / \
+       3   10
+      / \    \
+     1   6    14
+        / \   /
+       4   7 13
+"""
+
+
+def max_ancestor_diff(self):
+    if self.root is None:
+        return 0
+
+    self.max_difference = 0
+    # sending node, min and max
+    stack = [(self.root, self.root.value, self.root.value)]
+
+    while stack:
+        node, curr_min, curr_max = stack.pop()
+
+        self.max_difference = max(self.max_difference,
+                                  abs(curr_min - node.value),
+                                  abs(curr_max - node.value))
+
+        new_min = min(curr_min, node.value)
+        new_max = max(curr_max, node.value)
+
+        if node.left:
+            stack.append((node.left, new_min, new_max))
+
+        if node.right:
+            stack.append((node.right, new_min, new_max))
+
+    return self.max_differnce
+
 
 
 
