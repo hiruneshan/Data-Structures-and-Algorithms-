@@ -156,3 +156,37 @@ def find_floor_ceil(self, target):
     return floor, ceiling
 
 
+#augmented BST
+# lass BST:
+#     class Node:
+#         def __init__(self, value, size=1):
+#             self.value = value
+#             self.size = size
+#             self.left = None
+#             self.right = None
+#
+#     def __init__(self):
+#         self.root = None
+
+    def find_rank(self, target):
+        """
+        Returns the count of nodes with values <= target.
+        Iterative, O(log n) on average for balanced BST.
+        """
+        rank = 0
+        current = self.root
+
+        while current:
+            if current.value > target:
+                # Go left, because current and right subtree are too large
+                current = current.left
+            else:
+                # current.value <= target:
+                # Add left subtree size (if exists) + 1 (current)
+                left_size = current.left.size if current.left else 0
+                rank += left_size + 1
+                # Move right to find more <= target
+                current = current.right
+
+        return rank
+
