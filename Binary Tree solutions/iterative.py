@@ -288,25 +288,25 @@ class BT:
             if node.right:
                 stack.append((node.right, new_min, new_max))
 
-        return self.max_differnce
+        return self.max_difference
 
     def vertical_sums(self):
 
-        queue = Queue()
+        queue_obj = queue.Queue()
         columnSum = {}
-        queue.put((self.root, 0))
+        queue_obj.put((self.root, 0))
 
-        while not queue.empty():
-            node, val = queue.get()
+        while not queue_obj.empty():
+            node, val = queue_obj.get()
 
-            if val not columnSum:
+            if val not in columnSum:
                 columnSum[val] = 0
             columnSum[val] += node.value
 
             if node.left:
-                queue.put((node.left, val - 1))
+                queue_obj.put((node.left, val - 1))
             if node.right:
-                queue.put((node.right, val + 1))
+                queue_obj.put((node.right, val + 1))
 
         keys = columnSum.keys()
         sortedKeys = sorted(keys)
